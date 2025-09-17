@@ -8,8 +8,8 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 
 
 
-[![Preview](./diagram.png)]
-*Figure 1: A brief description of the figure and what it illustrates.*
+![Preview](./diagram.png)
+* A brief description of the figure and what it illustrates.*
 
 ---
 ## Dataset
