@@ -7,7 +7,8 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 ---
 
 
-![Placeholder Figure](./Diagram.pdf)
+
+[View the PDF](./Diagram.pdf)
 
 *Figure 1: A brief description of the figure and what it illustrates.*
 
