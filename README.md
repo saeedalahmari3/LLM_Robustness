@@ -51,21 +51,19 @@ To run the code, follow the following steps.
 
 ### Usage
 
-[Explain how to run your code with examples. Include any command-line arguments or configuration options.]
-
 To run the main script, use the following command:
+
+
+
+```bash
+python eval_robustness.py --task infer --ori_json_path [path2ori_json] --trans_json_path [path2trans_json]
+```
+where the JSON files are the dataset shown in the data directory.
 
 ```bash
 python eval_robustness.py --task eval --path2CSV [path2CSVfile]
 ```
 The CSVFile should include the original text in one column and the perturbed text in the other column. 
-
-```bash
-python eval_robustness.py --task infer --ori_json_path [path2ori_json] --trans_json_path [path2trans_json]
-```
-
-
-where the JSON files are the dataset shown in the data directory.
 
 ---
 
