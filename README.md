@@ -58,17 +58,31 @@ The CSVFile should include the original text in one column and the perturbed tex
 
 ```bash
 python eval_robustness.py --task infer --ori_json_path [path2ori_json] --trans_json_path [path2trans_json]
-```  where the JSON files are the dataset shown in the data directory.
+```
+
+
+where the JSON files are the dataset shown in the data directory.
+
 ---
 
 ## Contributing
 
-[If you are open to contributions, explain how others can contribute to your project. You can include information on reporting bugs, suggesting features, or submitting pull requests.]
+We welcome contributions to this project! There are several ways you can help:
+
+- **Reporting Bugs**: If you find a bug, please open an issue with as much detail as possible (steps to reproduce, expected vs. actual behavior, screenshots if applicable).
+- **Suggesting Features**: Have an idea for an improvement? Open an issue and describe your suggestion. We’d love to discuss how it might fit into the project.
+- **Submitting Pull Requests**: 
+  1. Fork the repository
+  2. Create a new branch for your feature or bugfix (`git checkout -b feature-name`)
+  3. Make your changes and commit them with clear messages
+  4. Push to your fork and submit a Pull Request
+
+Please ensure your code follows the existing style and includes tests where applicable. All contributions will be reviewed, and feedback may be provided to ensure the highest quality.
+
+Thank you for helping us improve this project!
 
 ---
 
 ## License
-
-[Specify the license for your project. For example, MIT License, Apache 2.0, etc.]
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
