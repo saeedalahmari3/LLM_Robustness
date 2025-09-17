@@ -12,6 +12,10 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 *Figure 1: A brief description of the figure and what it illustrates.*
 
 ---
+## Dataset
+The dataset for this project is adopted from 1) https://huggingface.co/datasets/hugginglearners/amazon-reviews-sentiment-analysis    and 2) https://huggingface.co/datasets/noob123/imdb_review_3000
+
+This dataset can be found in the folder named "data", where "ori" refers to the original textual data, and "trans" refers to the perturbed textual data.
 
 ## How to Run the Code
 
