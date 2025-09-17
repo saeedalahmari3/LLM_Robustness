@@ -58,9 +58,7 @@ The CSVFile should include the original text in one column and the perturbed tex
 
 ```bash
 python eval_robustness.py --task infer --ori_json_path [path2ori_json] --trans_json_path [path2trans_json]
-```
-
-where the JSON files are the dataset shown in the data directory.
+```  where the JSON files are the dataset shown in the data directory.
 ---
 
 ## Contributing
