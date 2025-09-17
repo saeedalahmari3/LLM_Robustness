@@ -9,7 +9,7 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 
 
 ![Preview](./diagram.png)
-* A brief description of the figure and what it illustrates.*
+* Our proposed evaluation of the LLM robustness pipeline.*
 
 ---
 ## Dataset
