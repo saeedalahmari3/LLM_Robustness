@@ -17,16 +17,20 @@ Large Language Models (LLMs) have demonstrated impressive performance across var
 
 ### Prerequisites
 
-[List any software, libraries, or dependencies that need to be installed before running your code. Include version numbers if they are important.]
+Below are the main libraries needed to run the code
 
-- Python 3.x
+- Python 3.8
 - NumPy
 - Pandas
-- ...
+- Ollama 0.4.7
+- openai 1.60
+- rouge 1.0.1
+- sentence-transformers 3.2.1
+- together 1.3.14
 
 ### Installation
 
-[Provide step-by-step instructions on how to install your project and its dependencies.]
+To run the code, follow the following steps. 
 
 1.  Clone the repository:
     ```bash
