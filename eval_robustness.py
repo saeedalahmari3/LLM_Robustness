@@ -8,6 +8,7 @@ import torch
 from utils import *
 import pandas as pd 
 from eval_metrics import compute_bleu, compute_rouge, compute_jaccard_index
+import argparse
 
 
 print("PyTorch version:", torch.__version__)
@@ -21,13 +22,6 @@ MODEL_NAME = 'llama3:latest'
 print('Listed models...')
 print(ollama.list())
 
-# Paths to your JSON files
-ORI_JSON_PATH = './data/Amazon_reviews/ori_Keyboard_2999.json'
-TRANS_JSON_PATH = './data/Amazon_reviews/trans_Keyboard_2999.json'
-if not os.path.exists('ollama'):
-    os.makedirs('ollama')
-
-OUTPUT_CSV_PATH = './ollama/'+MODEL_NAME+'_output_results_trans_'+ORI_JSON_PATH.rsplit('/',1)[1].split('.json')[0]+'.csv'
 
 def read_prompts_from_json(json_path):
     prompts = []
@@ -136,9 +130,29 @@ def evaluate(path2CSV):
     df.to_csv(path2CSV.split('.csv')[0]+'_measured.csv',index=False)
 
 if __name__ == '__main__':
-    # Read prompts from both original and transformed JSON files
-    task = ['eval']
-    if 'infer' in task:
+    parser = argparse.ArgumentParser(description='Evaluate or infer LLM robustness.')
+    parser.add_argument('--task', type=str, choices=['infer', 'eval'], required=True, help='Task to perform: infer or eval')
+    parser.add_argument('--path2CSV', type=str, default='/Volumes/Expansion/Collaboration/USF/USF_team_LLM_response_robustness/Final_results_movie0.1', help='Path to CSV file or directory for evaluation')
+    parser.add_argument('--ori_json_path', type=str, help='Path to original JSON file')
+    parser.add_argument('--trans_json_path', type=str, help='Path to transformed JSON file')
+    args = parser.parse_args()
+
+    # Require JSON paths if task is infer
+    if args.task == 'infer':
+        if not args.ori_json_path or not args.trans_json_path:
+            parser.error('--ori_json_path and --trans_json_path are required when task is infer')
+        ORI_JSON_PATH = args.ori_json_path
+        TRANS_JSON_PATH = args.trans_json_path
+    else:
+        ORI_JSON_PATH = args.ori_json_path if args.ori_json_path else './data/Amazon_reviews/ori_Keyboard_2999.json'
+        TRANS_JSON_PATH = args.trans_json_path if args.trans_json_path else './data/Amazon_reviews/trans_Keyboard_2999.json'
+
+    if not os.path.exists('ollama'):
+        os.makedirs('ollama')
+
+    OUTPUT_CSV_PATH = './ollama/'+MODEL_NAME+'_output_results_trans_'+ORI_JSON_PATH.rsplit('/',1)[1].split('.json')[0]+'.csv'
+
+    if args.task == 'infer':
         ori_prompts = read_prompts_from_json(ORI_JSON_PATH)
         trans_prompts = read_prompts_from_json(TRANS_JSON_PATH)
 
@@ -147,24 +161,29 @@ if __name__ == '__main__':
         trans_responses = generate_responses(trans_prompts)
 
         # Compute cosine similarity and save results to a CSV file
-        compute_and_save_results(ori_prompts, ori_responses, trans_prompts, trans_responses,OUTPUT_CSV_PATH)
-    elif 'eval' in task:
-        path2CSV = '/Volumes/Expansion/Collaboration/USF/USF_team_LLM_response_robustness/Final_results_movie0.1'
-        for item in os.listdir(path2CSV):
-            if item.startswith('._'):
-                continue
-            elif item.endswith('_measured.csv'):
-                continue
-            elif item.endswith('.csv'):
-                print(item)
-                evaluate(os.path.join(path2CSV,item))
-            elif os.path.isdir(os.path.join(path2CSV,item)):
-                for sub_item in os.listdir(os.path.join(path2CSV,item)):
-                    if sub_item.startswith('.'):
-                        continue
-                    elif sub_item.endswith('_measured.csv'):
-                        continue
-                    elif sub_item.endswith('.csv'):
-                        print(sub_item)
-                        evaluate(os.path.join(path2CSV,item,sub_item))
+        compute_and_save_results(ori_prompts, ori_responses, trans_prompts, trans_responses, OUTPUT_CSV_PATH)
+    elif args.task == 'eval':
+        path2CSV = args.path2CSV
+        if os.path.isfile(path2CSV):
+            if path2CSV.endswith('.csv') and not path2CSV.endswith('_measured.csv'):
+                print(os.path.basename(path2CSV))
+                evaluate(path2CSV)
+        else:
+            for item in os.listdir(path2CSV):
+                if item.startswith('._'):
+                    continue
+                elif item.endswith('_measured.csv'):
+                    continue
+                elif item.endswith('.csv'):
+                    print(item)
+                    evaluate(os.path.join(path2CSV, item))
+                elif os.path.isdir(os.path.join(path2CSV, item)):
+                    for sub_item in os.listdir(os.path.join(path2CSV, item)):
+                        if sub_item.startswith('.'):
+                            continue
+                        elif sub_item.endswith('_measured.csv'):
+                            continue
+                        elif sub_item.endswith('.csv'):
+                            print(sub_item)
+                            evaluate(os.path.join(path2CSV, item, sub_item))
 
