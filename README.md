@@ -1,12 +1,11 @@
-# [Your Paper Title]
+# Large Language Models Robustness Against Perturbation
 
-## Abstract
+## Saeed S. Alahmari (Najran University-Najran-Saudi Arabia), Lawerence Hall (University of South Florida-Tampa-FL-United States), Peter R. Mouton (SRC Biosciences, Tampa-FL-United States), Dmitry Goldgof (University of South Florida-Tampa-FL-United States)
 
-[Insert your paper's abstract here. Provide a concise summary of your research, including the problem, methods, results, and conclusions.]
+Large Language Models (LLMs) have demonstrated impressive performance across various natural language processing (NLP) tasks, including text summarization, classification, and generation. Despite their success, LLMs are primarily trained on curated datasets that lack human-induced errors, such as typos or variations in word choice. As a result, LLMs may produce unexpected outputs when processing text containing such perturbations. In this paper, we investigate the resilience of LLMs to two types of text perturbations: typos and word substitutions. Using two public datasets, we evaluate the impact of these perturbations on text generation using six state-of-the-art models, including GPT-4o and LLaMA3.3-70B. Although previous studies have primarily examined the effects of perturbations in classification tasks, our research focuses on their impact on text generation. The results indicate that LLMs are sensitive to text perturbations, leading to variations in generated outputs, which have implications for their robustness and reliability in real-world applications.
 
 ---
 
-## Figure
 
 ![Placeholder Figure](https://via.placeholder.com/600x400.png?text=Your+Figure+Here)
 
